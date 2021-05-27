@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Scan{
 
-
     public static void main(String[] args){
         System.out.println("Bitte geben sie Ihren namen an: ");
         Scanner nameScanner = new Scanner(System.in);
