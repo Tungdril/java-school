@@ -3,6 +3,7 @@ import java.util.*;
 public class KassenbonList {
 
     static ArrayList<String> items = new ArrayList<>();
+    static int amount=0;
     
 
 
@@ -20,6 +21,11 @@ public class KassenbonList {
                 String item = s.nextLine();
                 items.add(item);
 
+                System.out.println("\nBitte geben sie die gewünschten menge an: ");
+                Scanner am = new Scanner(System.in);
+                amount = am.nextInt();
+                
+
                 System.out.printf("---------------------------------\n"); //graphic seperator
                 break;
                 case 2:
@@ -27,19 +33,18 @@ public class KassenbonList {
                 print();
                 break;
             }
-        }
-        
-        
-        
-
+        }    
     }
     static void print(){
+        double price = (Math.random()*15.0+1.0);
 
         for (int i = 0;i<items.size(); i++){       
             String printItem = items.get(i);       
-            System.out.printf(printItem);
+            System.out.printf(printItem+"\t 1 x "+"%.2f", price);
+            System.out.printf(" EUR\n"); 
         }
         
     }
 }
 
+//TODO item amount with price multiplication and print, add total price, given and return value
