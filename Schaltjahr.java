@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Schaltjahr {
@@ -9,8 +10,11 @@ public class Schaltjahr {
         System.out.print("Bitte gib das gewünschte Jahr ein (0 zum beenden): ");
 
         //get user input
-        Scanner year = new Scanner(System.in);
+        try {
+            Scanner year = new Scanner(System.in);
         int yearInput = year.nextInt();
+        
+        
 
         //if get calc()'s return value and run the if-block
         if(calc(yearInput) == true && yearInput != 0){
@@ -25,6 +29,10 @@ public class Schaltjahr {
         }
         //restarts the program as long as yearInput is NOT 0
         main(null);
+    } catch (InputMismatchException ex) {
+            System.out.println("\nEingabe ungültig! Bitte geben Sie eine Zahl ein!");
+            main(null);
+        }
     }
   
     //calculate leapYear and returns true if yearInput is: divisible by 4 AND NOT divisible by 100 OR divisible by 400
