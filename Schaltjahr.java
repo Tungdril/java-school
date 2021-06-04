@@ -20,12 +20,11 @@ public class Schaltjahr {
 
         //if get calc()'s return value and run the if-block
         if(calc(yearInput) == true){
-            System.out.println("\n" + yearInput + " ist ein Schaltjahr!");
-            main(null);
+            System.out.println("\n" + yearInput + " ist ein Schaltjahr!");        
         }else {
             System.out.println("\n" + yearInput + " ist kein Schaltjahr!");
-            main(null);
         }
+        main(null);
     }
   
     //calculate leapYear and returns true if yearInput is: divisible by 4 AND NOT divisible by 100 OR divisible by 400
