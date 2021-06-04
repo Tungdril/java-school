@@ -6,7 +6,7 @@ public class Schaltjahr {
         System.out.println("\n-------------------------");
         System.out.println("    Schaltjahrrechner");
         System.out.println("-------------------------\n");
-        System.out.print("Bitte gib das gewünschte Jahr ein: ");
+        System.out.print("Bitte gib das gewünschte Jahr ein (0 zum beenden): ");
 
         //get user input
         Scanner year = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class Schaltjahr {
             System.out.println("\n" + yearInput + " ist kein Schaltjahr!");
         }else{
             //ends the program if the user inputs 0 as yearInput
-            System.out.println("\nJahr 0 ist ungültig!");
+            System.out.println("\nProgramm geschlossen");
             year.close();
             System.exit(0);
         }
