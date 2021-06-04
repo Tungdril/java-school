@@ -4,9 +4,9 @@ public class Schaltjahr {
     public static void main(String[] args){
         //visual stuff
         System.out.println("\n-------------------------");
-        System.out.println("Schaltjahrrechner");
+        System.out.println("    Schaltjahrrechner");
         System.out.println("-------------------------\n");
-        System.out.println("Bitte gib das gewünschte Jahr ein:");
+        System.out.print("Bitte gib das gewünschte Jahr ein: ");
 
         //get user input
         Scanner year = new Scanner(System.in);
@@ -21,8 +21,10 @@ public class Schaltjahr {
         //if get calc()'s return value and run the if-block
         if(calc(yearInput) == true){
             System.out.println("\n" + yearInput + " ist ein Schaltjahr!");
+            main(null);
         }else {
             System.out.println("\n" + yearInput + " ist kein Schaltjahr!");
+            main(null);
         }
     }
   
