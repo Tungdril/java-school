@@ -20,6 +20,7 @@ public class Schaltjahr {
         }else{
             //ends the program if the user inputs 0 as yearInput
             System.out.println("\nJahr 0 ist ungültig!");
+            year.close();
             System.exit(0);
         }
         //restarts the program as long as yearInput is NOT 0

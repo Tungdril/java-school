@@ -105,6 +105,7 @@ public class KassenbonList {
         try {
             Thread.sleep(2000);
             System.exit(0);
+            m.close();
         } catch (Exception e) {
             System.out.println(e);
         }
