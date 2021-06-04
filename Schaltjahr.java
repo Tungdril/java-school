@@ -12,17 +12,15 @@ public class Schaltjahr {
         Scanner year = new Scanner(System.in);
         int yearInput = year.nextInt();
 
-        //ends the program if the user inputs 0 as yearInput
-        if(yearInput == 0){
+        //if get calc()'s return value and run the if-block
+        if(calc(yearInput) == true && yearInput != 0){
+            System.out.println("\n" + yearInput + " ist ein Schaltjahr!");        
+        }else if(calc(yearInput) == false && yearInput != 0) {
+            System.out.println("\n" + yearInput + " ist kein Schaltjahr!");
+        }else{
+            //ends the program if the user inputs 0 as yearInput
             System.out.println("\nJahr 0 ist ungültig!");
             System.exit(0);
-        }
-
-        //if get calc()'s return value and run the if-block
-        if(calc(yearInput) == true){
-            System.out.println("\n" + yearInput + " ist ein Schaltjahr!");        
-        }else {
-            System.out.println("\n" + yearInput + " ist kein Schaltjahr!");
         }
         main(null);
     }
