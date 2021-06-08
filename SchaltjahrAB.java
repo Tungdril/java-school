@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.time.*;
 public class SchaltjahrAB {
     public static void main(String[] args) {
         int jahr;
@@ -9,17 +10,25 @@ public class SchaltjahrAB {
             jahr = eingabe.nextInt();
             if(jahr == 0 )  {
                 System.out.println("Programm Ende!");
+                eingabe.close();
                 System.exit(0);
             }
-            if (istSchaltjahr(jahr)) {
+            if (istSchaltjahr(jahr) == true && isPast(jahr) == false) {
                 System.out.println(jahr + " ist ein Schaltjahr!");
-            } else {
+
+            } else if (istSchaltjahr(jahr) == false && isPast(jahr) == false){
                 System.out.println(jahr + " ist kein Schaltjahr!");
-            }
+
+            } else if ((istSchaltjahr(jahr) == true && isPast(jahr) == true)){
+                System.out.println(jahr + " war ein Schaltjahr!");
+
+            } else if (istSchaltjahr(jahr) == false && isPast(jahr) == true){
+                System.out.println(jahr + " war kein Schaltjahr!");
+            } 
         } while(jahr != 0);
     }
 
-    
+    // I hate this, see Schaltjahr.java for a better implementation
     public static boolean istSchaltjahr(int jahr)  {
         boolean back = false;
         if(jahr % 4 == 0)  back = true;
@@ -27,12 +36,14 @@ public class SchaltjahrAB {
         if(jahr % 400 == 0) back = true;
         return back;
     }
+
+//code above, with the exception of the implementation of isPast was provided by the teacher and I can't change it
+public static boolean isPast(int jahr){
+    int currentYear = Year.now().getValue();
+    if(jahr < currentYear){
+        return true;
+    }else {
+        return false;
+    }
+    }
 }
-
-/*
-    1. Benötigt um die Scanner-Funktion verwenden zu können
-    2. int für das Jahr und boolean um festzustellen ob istSchaljahr wahr oder falsch ist
-    3. "==" vergleicht zwei werte und trifft zu wenn sie gleich sind, "!=" vergleicht zwei werte und trifft zu wenn sie ungleich sind
-    4. Um zu prüfen ob das jahr durch den nachfolgenden wert teilbar ist oder nicht
-
-*/
