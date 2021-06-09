@@ -9,7 +9,7 @@ public class Password{
        
         for(int i = 3; i != 0; i--){
 
-        System.out.println("Noch "+ i + " versuch\n");    
+        System.out.println("Noch "+ i + " versuche\n");    
 
         System.out.println("Bitte Benutzernahmen eingeben: ");
         bn = input.nextLine();
