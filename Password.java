@@ -5,8 +5,12 @@ public class Password{
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
 
-        String bn;
-        String pwd;
+        String bn, pwd;
+       
+        for(int i = 3; i != 0; i--){
+
+        System.out.println("Noch "+ i + " versuch\n");    
+
         System.out.println("Bitte Benutzernahmen eingeben: ");
         bn = input.nextLine();
 
@@ -15,10 +19,13 @@ public class Password{
 
         if(bn.equals("admin") && pwd.equals("geheim")){
             System.out.println("Herzlich Willkommen");
+            input.close();
+            System.exit(0);  
         } else {
             System.out.println("Ihre Daten sind inkorrekt");
-            input.close();
-            System.exit(0);         
-        }    
+            }   
+        } 
+        System.out.println("Keine weiteren versuche möglich!"); 
+        System.exit(0);     
     }
 }
