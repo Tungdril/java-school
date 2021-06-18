@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class NumberGuessing {
     public static void main(String[] args) {
@@ -29,8 +33,9 @@ public class NumberGuessing {
                 System.out.println("Das ist keine gültige Zahl!");
         }
     }
-     System.out.println("Treffer nach "+ counter + " Versuchen!"); 
-     System.out.println("Nochmal spielen (y/n)?");
+     System.out.println("Treffer nach "+ counter + " Versuchen!\n");
+     save(counter);
+     System.out.println("\nNochmal spielen (y/n)?");
 
      Scanner r = new Scanner(System.in);
 
@@ -40,11 +45,47 @@ public class NumberGuessing {
          main(null);
      }else{
          r.close();
+        showHS();
          System.exit(0);
      }
   } 
-}
-    
-        
- 
 
+  public static void save(int counter){
+      System.out.println("Bitte gib deinen Namen ein:");
+      Scanner n = new Scanner(System.in);
+      String name = n.nextLine();
+      
+      try(  FileWriter fw = new FileWriter("Highscores.txt", true);
+            BufferedWriter saveWriter = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(saveWriter))
+            { 
+
+          if(counter == 1){
+              out.println(name + ": " + counter + " Versuch\r\n");
+          }else{
+            out.println(name + ": " + counter + " Versuche\r\n");
+          }
+
+          saveWriter.close();
+          System.out.println("Saving successful!");
+          
+          } catch (Exception e) {
+          System.out.println("Error while saving!");
+      }
+  }
+
+  public static void showHS(){
+    try{
+        File save = new File("Highscores.txt");
+        Scanner readSave = new Scanner(save);
+        while(readSave.hasNextLine()){
+            String data = readSave.nextLine();
+            System.out.println(data);
+        }
+        readSave.close();
+    } catch (Exception e) {
+        System.out.println("Errow while reading!");
+    }
+
+  }
+} 
