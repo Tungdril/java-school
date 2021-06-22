@@ -5,6 +5,7 @@ public class calculator {
         //graphical start menu (sort of)
         System.out.println("------------------------------------------------------------------------------------------------------");
         System.out.println("[1] Do you wish to perform simple mathematical operations (+, -, *, /)? \n[2] Or calculate a checksum?");
+        System.out.println("[3] Quit the Program");
         System.out.println("------------------------------------------------------------------------------------------------------");
 
         //first input to decide if calc() or check() is called
@@ -15,7 +16,9 @@ public class calculator {
             calc();
         } else if (type == 2){
             check();
-        } else {
+        }else if (type == 3){
+            System.exit(0);
+        }else {
             //input mismatch handling
             System.out.println("Invalid choice, try again.\n");
             main(null);
@@ -126,7 +129,7 @@ public class calculator {
     public static void repeat(boolean isCheck){
         //gives the user the opportunity to calculate as much as he wants, without getting thrown out after each operation
         System.out.println("\nDo you wish to calculate another problem? (y/n)");
-        System.out.println("Other inputs will return you to the main menu!");
+        System.out.println("Pressing 'm' will return you to the main menu!");
 
         Scanner ag = new Scanner(System.in);
         String again = ag.next();
@@ -141,8 +144,11 @@ public class calculator {
         }else if (againChar == 'n'){
             //quits the program
             System.exit(0);
+        } else if (againChar == 'm'){
+            main(null);
         } else {
             //returns user to main menu
+            System.out.println("Invalid choice, returning to menu!");
             main(null);
         }
     }
