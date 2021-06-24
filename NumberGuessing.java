@@ -15,6 +15,7 @@ public class NumberGuessing {
         
            while(found == false){
                 try {
+            @SuppressWarnings("resource")
             Scanner guess = new Scanner(System.in);
 
             System.out.println("Zahl: ");
@@ -52,6 +53,7 @@ public class NumberGuessing {
 
   public static void save(int counter){
       System.out.println("Bitte gib deinen Namen ein:");
+      @SuppressWarnings("resource")
       Scanner n = new Scanner(System.in);
       String name = n.nextLine();
       

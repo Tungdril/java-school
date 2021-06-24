@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class calculator {
+public class Calculator {
     public static void main(String [] args){
         //graphical start menu (sort of)
         System.out.println("-----------------------------------------------------------------------------------------------------");
@@ -60,25 +60,25 @@ public class calculator {
         switch(operatorChar){
             case '+':
             solution = first + second;
-            System.out.println("\nResult: " + solution);
+            System.out.println("\n" + first + " " + operatorChar + " " + second + " = " + solution);
             repeat(false);
             break;
 
             case '-':
             solution = first - second;
-            System.out.println("\nResult: " + solution);
+            System.out.println("\n" + first + " " + operatorChar + " " + second + " = " + solution);
             repeat(false);
             break;
 
             case '*':
             solution = first * second;
-            System.out.println("\nResult: " + solution);
+            System.out.println("\n" + first + " " + operatorChar + " " + second + " = " + solution);
             repeat(false);
             break;
 
             case '/':
             solution = first / second;
-            System.out.println("\nResult: " + solution);
+            System.out.println("\n" + first + " " + operatorChar + " " + second + " = " + solution);
             repeat(false);
             break;
 
@@ -111,8 +111,9 @@ public class calculator {
 
         //calculates the checksum of the input
         try {
-            int number = in.nextInt();
-            int checksum = 0;
+            long number = in.nextLong();
+            
+            long checksum = 0L;
 
             while(number > 0){
                 checksum = checksum + (number % 10);

@@ -16,6 +16,9 @@ public class KassenbonList {
         while(breakLoop==false){
             System.out.println("\nMöchten Sie ein Lebensmittel hinzufügen oder den Kauf abschließen? \n");
             System.out.println("1: Lebensmittel hinzufügen\n2: Kauf abschließen");
+
+            //ignore scanner warning
+            @SuppressWarnings("resource")
             Scanner a = new Scanner(System.in);
             int itemAdd = a.nextInt();  //1 or 2?
 
