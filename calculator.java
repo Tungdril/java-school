@@ -3,11 +3,13 @@ import java.util.Scanner;
 public class calculator {
     public static void main(String [] args){
         //graphical start menu (sort of)
-        System.out.println("------------------------------------------------------------------------------------------------------");
-        System.out.println("[1] Do you wish to perform simple mathematical operations (+, -, *, /)? \n[2] Or calculate a checksum?");
+        System.out.println("-----------------------------------------------------------------------------------------------------");
+        System.out.println("[1] Do you wish to perform simple mathematical operation (+, -, *, /)? \n[2] Or calculate a checksum?");
         System.out.println("[3] Quit the Program");
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------------");
 
+        //used to ignore memory leak warning, as it is irrelevant
+        @SuppressWarnings("resource")
         //first input to decide if calc() or check() is called
         Scanner ty = new Scanner(System.in);
         int type = ty.nextInt();
@@ -35,6 +37,7 @@ public class calculator {
         System.out.println("--- Calculator ---");
         System.out.println("------------------\n");
 
+        @SuppressWarnings("resource")
         //scanner used for getting the numbers and operators
         Scanner in = new Scanner(System.in);
         
@@ -100,6 +103,7 @@ public class calculator {
         System.out.println("--- Checksum ---");
         System.out.println("----------------\n");
 
+        @SuppressWarnings("resource")
         //scanner for initial number input
         Scanner in = new Scanner(System.in);
 
@@ -131,6 +135,7 @@ public class calculator {
         System.out.println("\nDo you wish to calculate another problem? (y/n)");
         System.out.println("Pressing 'm' will return you to the main menu!");
 
+        @SuppressWarnings("resource")
         Scanner ag = new Scanner(System.in);
         String again = ag.next();
 
