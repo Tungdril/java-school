@@ -2,16 +2,19 @@ package Bank;
 
 import java.util.Scanner;
 import java.io.BufferedWriter;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+
+//TODO implement txt, solve static reference error, get the rest working
+
 
 public class BankMain {
 
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
 
-        System.out.println("Möchten sie ein neues Konto erstellen? [1]\n Oder sich anmelden? [2]");
+        System.out.println("Möchten sie ein neues Konto erstellen? [1]\nOder sich anmelden? [2]");
         int choice0 = s.nextInt();
 
         switch (choice0) {
@@ -25,7 +28,21 @@ public class BankMain {
         }
     }
 
+    public static void initialize(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
+        ATM newAccount = new ATM(userName,IBAN,moneyAmount,maxOverdraw,pin);
+    }
+
     public static void createAccount(){
+
+        //clears BankInfo.txt
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter("BankInfo.txt"); 
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+       
         Scanner s = new Scanner(System.in);
         System.out.println("---------- Konto erstellen ----------\n");
 
@@ -43,29 +60,32 @@ public class BankMain {
         System.out.println("Sie dürfen Ihr Konto um maximal 1000€ überziehen!\n");
         double maxOverdraw = 1000.0;
 
-        saveLogin();
-
-        ATM newAccount = new ATM(userName,IBAN,moneyAmount,maxOverdraw,pin);
+        saveLogin(userName, IBAN, moneyAmount, maxOverdraw, pin); 
     }
     
     public static void login(){
-        ATM login = new login();
+        //ATM login = new ATM();
+
     }
 
-    private void saveLogin(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
-            Scanner n = new Scanner(System.in);
-            String name = n.nextLine();
-            
+    public static void saveLogin(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
+
             try(  FileWriter fw = new FileWriter("BankInfo.txt", true);
                   BufferedWriter saveWriter = new BufferedWriter(fw);
                   PrintWriter out = new PrintWriter(saveWriter))
                   { 
-                    out.println(userName+IBAN+moneyAmount+maxOverdraw+pin);}
-      
-                saveWriter.close();
-                System.out.println("Saving successful!");
-                
+                    out.println(userName + "\n" + IBAN + "\n" + moneyAmount + "\n" + maxOverdraw + "\n" + pin);
+                    saveWriter.close();
+
+                System.out.println("Account successfully created!");
+
                 }catch (Exception e) {
-                System.out.println("Error while saving!");
+                System.out.println("Error while creating account!"); 
+
+                initialize(userName, IBAN, moneyAmount, maxOverdraw, pin); 
         }
+    }
 }
+
+
+

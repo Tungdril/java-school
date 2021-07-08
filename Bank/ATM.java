@@ -9,7 +9,7 @@ public class ATM {
     private boolean locked = false;
 
 
-    public ATM(String userName, String IBAN, double moneyAmount, double maxOverdraw, int pin){
+    ATM(String userName, String IBAN, double moneyAmount, double maxOverdraw, int pin){
         this.userName = userName;
         this.IBAN = IBAN;
         this.moneyAmount = moneyAmount;
@@ -19,7 +19,7 @@ public class ATM {
         login();
     }
 
-    public boolean login(){
+    public static boolean login(){
         Scanner s = new Scanner(System.in);
 
         System.out.println("------ Bankonto ------");
