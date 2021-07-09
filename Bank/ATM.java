@@ -1,9 +1,13 @@
 package Bank;
 import java.util.Scanner;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ATM {
     
-    private String userName, IBAN;
+    private static String userName;
+    private static String IBAN;
     private double moneyAmount, maxOverdraw;
     private int pin, tries;
     private boolean locked = false;
@@ -20,20 +24,30 @@ public class ATM {
     }
 
     public static boolean login(){
-        Scanner s = new Scanner(System.in);
+        
+        try {
+            Scanner s = new Scanner(System.in);
+            File info = new File("Bank/BankInfo.txt");
+            Scanner readInfo = new Scanner(info);
 
-        System.out.println("------ Bankonto ------");
+            String userNameCompare = Files.readAllLines(Paths.get("Bank/BankInfo.txt")).get(0);
+            readInfo.close();
+            System.out.println("------ Bankonto ------\n");
+            System.out.println("Geben Sie Ihren Benutzernamen ein:");
 
-        System.out.println("Geben Sie Ihren Benutzernamen oder Ihre IBAN ein.");
+            String userNameInput = s.nextLine();
 
-        String userNameInput = s.next();
-
-        if(userNameInput.equals(userName) || userNameInput.equals(IBAN)){
+            if(userNameInput.equals(userNameCompare)){
+                System.out.println("Login successful!");  
             return true;
-        } else{
-            return false;
+            } else{
+                System.out.println("Login unsuccessful!");   
+            return false;}
+        } catch (Exception e) {
         }
+            return false;    
     }
+    
 
     public double getAmount(int pin){
         if(pin == this.pin){
@@ -54,14 +68,11 @@ public class ATM {
             return true;
         }else{
             return false;
-        }
-        
-
-        
+        }     
     }
     
     public boolean withdraw(double withdrawAmount, int inputPin){
-        if(pin == this.pin){
+        if(inputPin == this.pin){
             tries = 0;
             if(withdrawAmount <= this.moneyAmount){
             moneyAmount = moneyAmount - withdrawAmount;
@@ -78,8 +89,8 @@ public class ATM {
         
     }
 
-    public void displayAmount(int InputPin){
-        if(pin == this.pin){
+    public void displayAmount(int inputPin){
+        if(inputPin == this.pin){
             tries = 0;
             System.out.println("Kontostand: " + moneyAmount);
         }else{

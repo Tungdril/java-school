@@ -4,7 +4,10 @@ import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.File;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 //TODO implement txt, solve static reference error, get the rest working
 
@@ -14,7 +17,7 @@ public class BankMain {
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
 
-        System.out.println("Möchten sie ein neues Konto erstellen? [1]\nOder sich anmelden? [2]");
+        System.out.println("[1] Neues Konto erstellen\n[2] Anmelden");
         int choice0 = s.nextInt();
 
         switch (choice0) {
@@ -23,21 +26,23 @@ public class BankMain {
                 break;
         
             case 2:
-                login();
+                ATM.login();
                 break;
         }
     }
 
     public static void initialize(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
         ATM newAccount = new ATM(userName,IBAN,moneyAmount,maxOverdraw,pin);
+        newAccount.login();
     }
 
     public static void createAccount(){
 
+
         //clears BankInfo.txt
         PrintWriter pw;
         try {
-            pw = new PrintWriter("BankInfo.txt"); 
+            pw = new PrintWriter("Bank/BankInfo.txt"); 
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -63,26 +68,21 @@ public class BankMain {
         saveLogin(userName, IBAN, moneyAmount, maxOverdraw, pin); 
     }
     
-    public static void login(){
-        //ATM login = new ATM();
-
-    }
 
     public static void saveLogin(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
 
-            try(  FileWriter fw = new FileWriter("BankInfo.txt", true);
+            try(  FileWriter fw = new FileWriter("Bank/BankInfo.txt", true);
                   BufferedWriter saveWriter = new BufferedWriter(fw);
                   PrintWriter out = new PrintWriter(saveWriter))
                   { 
                     out.println(userName + "\n" + IBAN + "\n" + moneyAmount + "\n" + maxOverdraw + "\n" + pin);
                     saveWriter.close();
 
-                System.out.println("Account successfully created!");
+                //System.out.println("Account successfully created!");
+                ATM.login();
 
                 }catch (Exception e) {
-                System.out.println("Error while creating account!"); 
-
-                initialize(userName, IBAN, moneyAmount, maxOverdraw, pin); 
+                System.out.println("Error while creating account!");       
         }
     }
 }
