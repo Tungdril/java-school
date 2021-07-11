@@ -2,22 +2,19 @@ package Bank;
 
 import java.util.Scanner;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-//TODO implement txt, solve static reference error, get the rest working
-
 
 public class BankMain {
 
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
 
-        System.out.println("[1] Neues Konto erstellen\n[2] Anmelden");
+        //main choice interface
+        System.out.println("---------- ATM ----------\n");
+
+        System.out.println("[1] Neues Konto erstellen\n[2] Anmelden\n[3] Beenden");
         int choice0 = s.nextInt();
 
         switch (choice0) {
@@ -26,28 +23,20 @@ public class BankMain {
                 break;
         
             case 2:
-                ATM.login();
+                new ATM();
                 break;
-        }
-    }
 
-    public static void initialize(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
-        ATM newAccount = new ATM(userName,IBAN,moneyAmount,maxOverdraw,pin);
-        newAccount.login();
+            case 3:
+                System.exit(0);
+                break;
+            default:
+            System.out.println("Ungültige Eingabe!");
+        }
     }
 
     public static void createAccount(){
 
-
-        //clears BankInfo.txt
-        PrintWriter pw;
-        try {
-            pw = new PrintWriter("Bank/BankInfo.txt"); 
-            pw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-       
+        //gets user input for account creation
         Scanner s = new Scanner(System.in);
         System.out.println("---------- Konto erstellen ----------\n");
 
@@ -65,27 +54,35 @@ public class BankMain {
         System.out.println("Sie dürfen Ihr Konto um maximal 1000€ überziehen!\n");
         double maxOverdraw = 1000.0;
 
+        //gives the initialized values to saveLogin
         saveLogin(userName, IBAN, moneyAmount, maxOverdraw, pin); 
     }
     
-
     public static void saveLogin(String userName,String IBAN, double moneyAmount, double maxOverdraw,int pin){
+            //creates the file path and appends the userName
+            String path = ("Bank/BankInfo_" + userName);
 
-            try(  FileWriter fw = new FileWriter("Bank/BankInfo.txt", true);
+            //checks if the file/account already exists
+            File check = new File(path);
+            if(check.exists()){
+                System.out.println("Dieser account existiert bereits!\n");
+                main(null);
+            }
+
+            //writes all the account info to a .txt file (one for each account)
+            try(  
+                  FileWriter fw = new FileWriter(path);
                   BufferedWriter saveWriter = new BufferedWriter(fw);
                   PrintWriter out = new PrintWriter(saveWriter))
                   { 
-                    out.println(userName + "\n" + IBAN + "\n" + moneyAmount + "\n" + maxOverdraw + "\n" + pin);
+                    out.println(userName + "\n" + IBAN + "\n" + moneyAmount + "\n" + maxOverdraw + "\n" + pin + "\n" + "false");
                     saveWriter.close();
 
                 //System.out.println("Account successfully created!");
-                ATM.login();
+                main(null);
 
                 }catch (Exception e) {
                 System.out.println("Error while creating account!");       
         }
     }
 }
-
-
-
